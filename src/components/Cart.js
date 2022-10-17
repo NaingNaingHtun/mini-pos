@@ -52,7 +52,7 @@ const Cart = () => {
           <span className="font-bold text-[#2E3EA1]">Ks {total}</span>
         </div>
         <button
-          className="w-full text-white bg-[#2E3EA1] p-[10px_18px] rounded-lg"
+          className="w-full text-white bg-[#2E3EA1] p-[10px_18px] rounded-lg disabled:bg-gray-300"
           onClick={handlePayNow}
           disabled={cart.length === 0}
           style={{ cursor: cart.length === 0 ? "not-allowed" : "pointer" }}
