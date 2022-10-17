@@ -8,8 +8,9 @@ const OrderItem = ({ item }) => {
 
   //HANDLERS
   const updateQuantity = (e) => {
-    //if the user type empty string and the quantity is zero
-    if (Number(e.target.value) === 0 && Number(e.target.value) === NaN) {
+    const onlyNumber = /^\d+$/gi; //only numeric 0 to 9
+    //if the quantity is less thant zero and it is the invalid number, then just set quantity to 1
+    if (Number(e.target.value) === 0 || !onlyNumber.test(e.target.value)) {
       dispatch({
         type: "SET_QUANTITY",
         payload: { id: item.id, quantity: 1 },
