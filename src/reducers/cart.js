@@ -17,7 +17,7 @@ const reducer = (state, action) => {
         const newState = [...state];
         newState[productIndex] = {
           ...newState[productIndex],
-          quantity: newState[productIndex].quantity++,
+          quantity: newState[productIndex].quantity + 1,
         };
         return newState;
       } else {
