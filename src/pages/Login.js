@@ -50,7 +50,7 @@ const Login = ({ setIsAuthenticated }) => {
     <div className="flex w-[100vw] h-[100vh] font-medium">
       <div className="flex-1 hidden md:flex flex-col justify-between bg-[#151D72] text-white">
         <img
-          src="/images/logo.png"
+          src="images/logo.png"
           alt="K-Link Logo"
           className="h-[35px] w-[152px] m-[32px]"
         />
