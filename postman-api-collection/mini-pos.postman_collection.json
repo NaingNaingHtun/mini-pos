@@ -45,6 +45,14 @@
 				"header": []
 			},
 			"response": []
+		},
+		{
+			"name": "get all the category names list",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
 		}
 	]
 }
