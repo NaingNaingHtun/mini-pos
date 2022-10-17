@@ -1,7 +1,8 @@
 const reducer = (state, action) => {
   switch (action.type) {
     case "ADD_PRODUCT": {
-      //we need to check if the product has already been added to the cart
+      //first we gonna check if the product has already been added, if so we will update its quantity
+      //otherwise we will add it to the cart
       let productExisted = false;
       let productIndex = null;
       state.forEach((product, index) => {
@@ -20,7 +21,7 @@ const reducer = (state, action) => {
         };
         return newState;
       } else {
-        //product is the new product, then add to the cart
+        //product is the new product, then add it to the cart
         return [...state, action.payload];
       }
     }
@@ -38,12 +39,13 @@ const reducer = (state, action) => {
         }
       });
     }
+    //when decreasing quantity, we need to check if the quantity is decreased to 0,
+    //Reaching quantity of 0 should remove the product from the cart
     case "DECREASE_QUANTITY": {
-      //when decreasing the quantity, reaching to the quantity of 0 should remove the product
+      //first we gonna get the current product and then check if the quantity reaches to zero
       let currentProduct = {};
       let newState = [...state];
       let productIndex = null;
-      //getting the current product to see if we should remove the product or decrease quantity
       newState.forEach((product, index) => {
         if (product.id === action.payload) {
           currentProduct = product;
@@ -51,11 +53,11 @@ const reducer = (state, action) => {
         }
       });
 
-      //if the quantity is zero when we decreased,then we will do nothing and just remove the product
+      //if the quantity is zero when we decreased, remove the product
       if (currentProduct.quantity - 1 === 0) {
         return newState.filter((product) => product.id !== action.payload);
       } else {
-        //the quantity is still decreasable
+        //the quantity is still decreasable, then decrease it
         newState[productIndex] = {
           ...newState[productIndex],
           quantity: newState[productIndex].quantity - 1,

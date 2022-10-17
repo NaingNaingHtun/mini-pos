@@ -27,7 +27,6 @@ const Home = () => {
     searchInput,
   });
 
-  console.log(cart);
   //everytime query or title changes, we need to fetch the products again
   useEffect(() => {
     const fetchProducts = async () => {
