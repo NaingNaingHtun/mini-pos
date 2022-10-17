@@ -5,15 +5,6 @@ import { BeatLoader } from "react-spinners";
 import cardReducer from ".././reducers/cart";
 import Cart from "../components/Cart";
 import Products from "../components/Products";
-const categories = [
-  { label: "All", value: "" },
-  { label: "Hat", value: "hat" },
-  { label: "Glasses", value: "glasses" },
-  { label: "Shirt", value: "shirt" },
-  { label: "Coat", value: "coat" },
-  { label: "Pant", value: "pant" },
-  { label: "Shoe", value: "shoe" },
-];
 
 const CartContext = React.createContext();
 const Home = () => {
@@ -22,11 +13,26 @@ const Home = () => {
   const [category, setCategory] = useState(""); //all = "", by default
   const [searchInput, setSearchInput] = useState("");
   const [fetchingProducts, setFetchingProducts] = useState(false);
+  const [categories, setCategories] = useState([]);
   const [query, setQueryParameters] = useState({
     category: category === "all" ? "" : category,
     searchInput,
   });
 
+  //fetch all the category names list
+  useEffect(() => {
+    const fetchCategoryNames = async () => {
+      await api
+        .get("/products/category_names_list")
+        .then((res) => {
+          setCategories(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    fetchCategoryNames();
+  }, []);
   //everytime query or title changes, we need to fetch the products again
   useEffect(() => {
     const fetchProducts = async () => {
@@ -79,17 +85,27 @@ const Home = () => {
             <SearchBar setSearchInput={setSearchInput} />
           </div>
           <div className="h-[8vh] md:h-[12vh] px-5 flex items-center gap-2 overflow-x-scroll">
+            <div
+              className="p-[4px_12px] text-white rounded-2xl cursor-pointer text-sm"
+              onClick={() => setCategory("")}
+              style={{
+                backgroundColor: "" === category ? "#2E3EA1" : "#ebeaea",
+                color: "" === category ? "white" : "#344054",
+              }}
+            >
+              All
+            </div>
             {categories.map((c, index) => (
               <div
                 key={index}
-                className="p-[4px_12px] text-white rounded-2xl cursor-pointer text-sm"
-                onClick={() => setCategory(c.value)}
+                className="p-[4px_12px] text-white rounded-2xl cursor-pointer text-sm capitalize"
+                onClick={() => setCategory(c)}
                 style={{
-                  backgroundColor: c.value === category ? "#2E3EA1" : "#ebeaea",
-                  color: c.value === category ? "white" : "#344054",
+                  backgroundColor: c === category ? "#2E3EA1" : "#ebeaea",
+                  color: c === category ? "white" : "#344054",
                 }}
               >
-                {c.label}
+                {c}
               </div>
             ))}
           </div>
