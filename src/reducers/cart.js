@@ -40,7 +40,7 @@ const reducer = (state, action) => {
       });
     }
     //when decreasing quantity, we need to check if the quantity is 1,
-    //if so, the user can decrease anymore
+    //if so, the user can not decrease anymore
     case "DECREASE_QUANTITY": {
       //first we gonna get the current product and then check if the quantity is 1
       let currentProduct = {};
@@ -53,7 +53,7 @@ const reducer = (state, action) => {
         }
       });
 
-      //if the quantity is 1, user can not decrease anymore
+      //if the quantity is 1, user can not decrease anymore, just return the previous quantity
       if (currentProduct.quantity === 1) {
         return newState;
       } else {
