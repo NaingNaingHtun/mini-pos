@@ -8,9 +8,12 @@ const OrderItem = ({ item }) => {
 
   //HANDLERS
   const updateQuantity = (e) => {
-    //first check if the quantity is zero, if so remove the product from the cart
+    //if the user type empty string and the quantity is zero
     if (Number(e.target.value) <= 0) {
-      dispatch({ type: "REMOVE_PRODUCT", payload: item.id });
+      dispatch({
+        type: "SET_QUANTITY",
+        payload: { id: item.id, quantity: 1 },
+      });
     } else {
       dispatch({
         type: "SET_QUANTITY",

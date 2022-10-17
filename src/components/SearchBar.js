@@ -90,8 +90,8 @@ const SearchBar = ({ setSearchInput }) => {
                     }}
                     dangerouslySetInnerHTML={{
                       __html: category.replaceAll(
-                        category,
-                        `<b>${category}</b>`
+                        searchQuery,
+                        `<b>${searchQuery}</b>`
                       ),
                     }}
                   ></div>

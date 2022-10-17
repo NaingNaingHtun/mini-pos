@@ -33,16 +33,16 @@ const reducer = (state, action) => {
     case "INCREASE_QUANTITY": {
       return state.map((product) => {
         if (product.id === action.payload) {
-          return { ...product, quantity: product.quantity++ };
+          return { ...product, quantity: product.quantity + 1 };
         } else {
           return product;
         }
       });
     }
-    //when decreasing quantity, we need to check if the quantity is decreased to 0,
-    //Reaching quantity of 0 should remove the product from the cart
+    //when decreasing quantity, we need to check if the quantity is 1,
+    //if so, the user can decrease anymore
     case "DECREASE_QUANTITY": {
-      //first we gonna get the current product and then check if the quantity reaches to zero
+      //first we gonna get the current product and then check if the quantity is 1
       let currentProduct = {};
       let newState = [...state];
       let productIndex = null;
@@ -53,9 +53,9 @@ const reducer = (state, action) => {
         }
       });
 
-      //if the quantity is zero when we decreased, remove the product
-      if (currentProduct.quantity - 1 === 0) {
-        return newState.filter((product) => product.id !== action.payload);
+      //if the quantity is 1, user can not decrease anymore
+      if (currentProduct.quantity === 1) {
+        return newState;
       } else {
         //the quantity is still decreasable, then decrease it
         newState[productIndex] = {
