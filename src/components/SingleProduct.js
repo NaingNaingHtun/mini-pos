@@ -17,11 +17,14 @@ const SingleProduct = ({ product }) => {
   };
   return (
     <FadeIn show={Boolean(product)}>
-      <div className="flex flex-col gap-2 p-2" onClick={handleClick}>
-        <div className="w-full md:w-[170px] h-[170px] flex justify-center items-center shadow-lg rounded-xl  bg-white hover:border-[1px] hover:border-[#2E3EA1] cursor-pointer hover:scale-105 transition-transform ">
+      <div
+        className="flex flex-col gap-2 p-2 items-start hover:shadow-2xl hover:rounded-xl cursor-pointer hover:scale-105 transition-transform"
+        onClick={handleClick}
+      >
+        <div className="w-full h-[170px] md:w-[170px] grid place-items-center bg-white cursor-pointer rounded-xl">
           <img
             src={product.image}
-            className="rounded-xl h-full object-contain"
+            className="rounded-xl h-full w-full object-contain"
             loading="lazy"
             alt={product.title}
           />
