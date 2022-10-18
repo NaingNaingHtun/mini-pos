@@ -24,7 +24,7 @@ const SingleProduct = ({ product }) => {
         <div className="w-full h-[170px] md:w-[170px] grid place-items-center bg-white cursor-pointer rounded-xl">
           <img
             src={product.image}
-            className="rounded-xl h-full w-full object-contain"
+            className="w-full h-[170px] rounded-xl object-contain"
             loading="lazy"
             alt={product.title}
           />
